@@ -21,7 +21,7 @@ export class RolesService {
         }
         return role
         }
-      async getAllRoles(roles:string[]){
+      async getAllRoles(roles:string[]|string){
           const allRoles =await this.roleModel.findAll({where:{value:roles}})
           return allRoles  
       }
