@@ -34,7 +34,7 @@ const PostList = () => {
       {loading ? (
         <h1>загрузка....</h1>
       ) : error ? (
-        error
+        error.message
       ) : posts.length ? (
         posts.map((item) => <SinglePost post={item} />)
       ) : done ? (

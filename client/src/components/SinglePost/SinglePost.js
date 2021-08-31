@@ -31,7 +31,7 @@ const SinglePost = ({ post }) => {
               <img
                 className={styles.img}
                 src={`http://localhost:4000/uploads/${file.path}`}
-                alt="image"
+                alt="sosi"
               />
             </div>
           );

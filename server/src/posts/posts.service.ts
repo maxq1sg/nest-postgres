@@ -29,7 +29,7 @@ export class PostsService {
     return this.postModel.destroy({ where: { id } });
   }
   async getAllPosts() {
-    return this.postModel.findAll({
+    const posts = await this.postModel.findAll({
       include: [
         {
           model: User,
@@ -41,5 +41,6 @@ export class PostsService {
         },
       ],
     });
+    return posts.reverse();
   }
 }

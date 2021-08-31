@@ -25,7 +25,14 @@ export class AuthService {
 
   async login(userDto: CreateUserDto) {
     const user = await this.validateUser(userDto);
-    return this.generateToken(user);
+    return {
+      user: {
+        name: user.name,
+        banned: user.banned,
+        banReason: user.banReason,
+      },
+      token: this.generateToken(user),
+    };
   }
   async registration(userDto: CreateUserDto) {
     const user = await this.userService.getSingleUser(userDto.name);
@@ -42,17 +49,15 @@ export class AuthService {
     });
     return this.generateToken(newUser);
   }
-  private async generateToken(user: User) {
+  private generateToken(user: User) {
     const payload = { id: user.id, roles: user.roles, name: user.name };
-    return {
-      token: this.jwtService.sign(payload),
-    };
+    return this.jwtService.sign(payload);
   }
   private async validateUser(user: CreateUserDto) {
     const userInDb = await this.userService.getSingleUser(user.name);
     const isPasswordCorrect = await bcrypt.compare(
       user.password,
-      userInDb?.password||""
+      userInDb?.password || ""
     );
 
     if (userInDb && isPasswordCorrect) {

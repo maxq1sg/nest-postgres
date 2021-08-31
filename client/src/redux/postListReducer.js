@@ -14,8 +14,13 @@ export const fetchAllPosts = createAsyncThunk(
     try {
       const { data } = await $api.get("/posts");
       return data;
-    } catch (err) {
-      return rejectWithValue([], err);
+    } catch (error) {
+      // const message =
+      //   error.response && error.response.data.message
+      //     ? error.response.data.message
+      //     : error.message;
+      return rejectWithValue(error.response.data);
+      // throw err;
     }
   }
 );
@@ -37,7 +42,7 @@ const getAllPostsSlice = createSlice({
     },
     [fetchAllPosts.rejected]: (state, { meta, payload, error }) => {
       state.loading = false;
-      state.error = error;
+      state.error = payload;
       state.done = true;
     },
   },

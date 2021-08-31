@@ -22,6 +22,7 @@ import { User } from "./users.model";
 import JwtGuard from "src/auth/jwt-auth.guard";
 import { ObjectSchema } from "joi";
 import * as chalk from "chalk";
+import LoginUserDto from "./dto/login.user.dto";
 
 class CreateUser {
   name: string;
@@ -35,7 +36,6 @@ export class UsersController {
   constructor(private userService: UsersService) {}
 
   @Get("/")
-  // @UseGuards(JwtGuard)
   @ApiOperation({ summary: "Получение всех пользователей" })
   @ApiResponse({ status: 200, type: [User] })
   getUsers() {
@@ -63,5 +63,9 @@ export class UsersController {
   @Get("/red/max")
   hello(@Query("page", new DefaultValuePipe(5), ParseIntPipe) page: number) {
     console.log(chalk.yellow(page + 121));
+  }
+  @Post("/login")
+  login(dto:LoginUserDto){
+    return this.userService
   }
 }

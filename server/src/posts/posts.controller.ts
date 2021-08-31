@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor, FilesInterceptor } from "@nestjs/platform-express";
@@ -15,22 +16,27 @@ import { editFileName } from "./file.config";
 import { extname } from "path";
 import { CreatePostDto } from "./create.post.dto";
 import * as chalk from "chalk";
+import JwtGuard from "src/auth/jwt-auth.guard";
 
 @Controller("posts")
 export class PostsController {
   constructor(private postService: PostsService) {}
 
   @Get("/")
+  @UseGuards(JwtGuard)
   getAllPosts() {
+    console.log("receibed");
     return this.postService.getAllPosts();
   }
   @Delete("/:id")
+  @UseGuards(JwtGuard)
   async deletePostById(@Param("id") id: number) {
     const hasDeleted = await this.postService.deletePostById(id);
     return { deleted: Boolean(hasDeleted) };
   }
 
   @Post("/new")
+  @UseGuards(JwtGuard)
   @UseInterceptors(
     FilesInterceptor("files", 100, {
       storage: diskStorage({

@@ -14,8 +14,10 @@ const Input = () => {
   useEffect(() => {
     if (newPost) {
       dispatch(fetchAllPosts());
+      setFiles([]);
+      setBody("");
     }
-  }, [newPost,dispatch]);
+  }, [newPost, dispatch]);
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addNewPostReset());
