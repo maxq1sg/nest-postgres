@@ -26,7 +26,7 @@ export class PostsService {
     return { newPost, fileInstances };
   }
   async deletePostById(id: number) {
-    return await this.postModel.destroy({ where: { id } });
+    return this.postModel.destroy({ where: { id } });
   }
   async getAllPosts() {
     return this.postModel.findAll({

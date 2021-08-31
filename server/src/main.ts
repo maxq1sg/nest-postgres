@@ -7,6 +7,7 @@ async function bootstrap() {
   const PORT = process.env.PORT || 5000;
   const app = await NestFactory.create(AppModule, { bufferLogs: true });
   // app.useLogger(app.get(Logger));
+  app.enableCors();
   const config = new DocumentBuilder()
     .setTitle("Cats example")
     .setDescription("The cats API description")

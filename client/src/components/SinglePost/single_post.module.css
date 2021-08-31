@@ -1,0 +1,35 @@
+.container {
+  border: 1px solid #000;
+  background: #ccc;
+  margin: 20px;
+  border-radius: 5px;
+  padding: 20px 10px;
+  position: relative;
+}
+.close {
+  color: red;
+  position: absolute;
+  top: 0;
+  right: 20px;
+  font-size: 2em;
+  cursor: pointer;
+  border: 1px solid #000;
+}
+.galery {
+  display: flex;
+}
+.galery > div {
+  max-width: 200px;
+  height: 200px;
+}
+.img {
+  width: 100%;
+  object-fit: cover;
+}
+.author{
+    color: blue;
+    font-weight: bold;
+}
+.body{
+    font-size: 1.5em;
+}

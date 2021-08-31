@@ -25,6 +25,7 @@ import { File } from "./files/file.model";
     LoggerModule.forRoot(),
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, "..", "uploads"),
+      serveRoot: "/uploads",
     }),
     SequelizeModule.forRoot({
       dialect: "postgres",

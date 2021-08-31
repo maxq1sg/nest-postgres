@@ -22,11 +22,12 @@ export class PostsController {
 
   @Get("/")
   getAllPosts() {
-    return this.postService.getAllPosts()
+    return this.postService.getAllPosts();
   }
   @Delete("/:id")
   async deletePostById(@Param("id") id: number) {
-    return this.postService.deletePostById(id);
+    const hasDeleted = await this.postService.deletePostById(id);
+    return { deleted: Boolean(hasDeleted) };
   }
 
   @Post("/new")
